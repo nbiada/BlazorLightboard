@@ -1,0 +1,25 @@
+﻿<NavLink @attributes="@AdditionalAttributes" 
+         Match="@Match" 
+         ActiveClass="@ActiveClass" 
+         @onclick="HideSideBar">@ChildContent</NavLink>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionalAttributes { get; set; }
+
+    [Parameter]
+    public NavLinkMatch Match { get; set; }
+    
+    [Parameter]
+    public string ActiveClass { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter] protected UXState UXState { get; set; }
+
+    void HideSideBar()
+    {
+        if (UXState.SlideInDisplay)
+            UXState.SetSlideInDisplay(false);
+    }
+}

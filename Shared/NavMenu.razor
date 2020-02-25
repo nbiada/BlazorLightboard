@@ -1,0 +1,31 @@
+﻿<nav>
+    <div class="top-row pl-4 navbar navbar-dark">
+        <a class="navbar-brand" href="">BLAZOR LIGHTBOARD</a>
+        <div>
+            <button class="navbar-toggler" @onclick=ToggleSideBar>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <button class="navbar-toggler" @onclick=ToggleNavMenu>
+                <span class="oi oi-excerpt" style="padding-right:2px;padding-left:2px;padding-bottom:2px;padding-top:5px;width:30px;height:30px;vertical-align: middle; background: no-repeat center center;background-size: 100% 100%;font-size:22px;font-weight:100"></span>
+            </button>
+        </div>
+    </div>
+    <div class="collapse">
+        <NavItems></NavItems>
+    </div>
+</nav>
+
+@code {
+
+    [CascadingParameter] protected UXState UXState { get; set; }
+
+    void ToggleNavMenu()
+    {
+        UXState.ToggleNavBar();
+    }
+
+    void ToggleSideBar()
+    {
+        UXState.ToggleSlideIn();
+    }
+}

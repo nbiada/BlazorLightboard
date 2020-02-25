@@ -1,0 +1,51 @@
+﻿@page "/counter"
+@inject LocalStorage Storage 
+
+<div class="container-fluid">
+    <h1 class="h2 mb-4">Counter</h1>
+    <div class="card-deck">
+        <div class="card border-left-primary shadow h-100">
+            <div class="card-header"><h6 class="font-weight-bold text-primary mb-0">What is this?</h6></div>
+            <div class="card-body">
+                <p class="card-text">
+                    This page is an example of Counter using State Manager.<br />
+                    Click the plus and minus button and look at the number on the right card.<br />
+                </p>
+                <p>
+                    Switching between pages the counter is not reset to zero, thanks to State Manager.
+                </p>
+            </div>
+        </div>
+        <div class="card border-left-info shadow h-100">
+            <div class="card-header"><h6 class="font-weight-bold text-info mb-0">Current Count</h6></div>
+            <div class="card-body">
+                <p class="card-text">
+                    <div class="d-sm-flex justify-content-start">
+                        <button class="btn btn-primary" @onclick="DecrementCount"><i class="oi oi-minus"></i></button>
+                        <h2 class="ml-5 mr-5">@UXState.Counter</h2>
+                        <button class="btn btn-primary" @onclick="IncrementCount"><i class="oi oi-plus"></i></button>
+                    </div>
+                </p>
+            </div>
+            <div class="card-footer">
+                The value of "Counter" property is stored in localStorage, check it via Developer Tools (F12).
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] protected UXState UXState { get; set; }
+
+    private async Task IncrementCount()
+    {
+        UXState.Counter++;
+        await Storage.SetItemAsync("counter", UXState.Counter);
+
+    }
+    private async Task DecrementCount()
+    {
+        UXState.Counter--;
+        await Storage.SetItemAsync("counter", UXState.Counter);
+    }
+}

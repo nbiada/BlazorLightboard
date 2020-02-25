@@ -1,0 +1,75 @@
+﻿@page "/"
+@inject LocalStorage Storage
+
+<div class="container-fluid">
+    <h1 class="display-4 mb-4 text-dark">Blazor Lightboard</h1>
+    <div class="card-deck">
+        <div class="card border-left-primary shadow">
+            <div class="card-header"><h6 class="font-weight-bold text-primary mb-0">The Blazor Lightweight Dashboard</h6></div>
+            <div class="card-body">
+                <p class="card-text">
+                    This project is a template for a lightweight dashboard in Blazor.<br />
+                    I've developed this example for my .net core projects.
+                </p>
+                <p class="card-text">
+                    The aim is to use Blazor, Boostrap and Javascript for development in server side mode.
+                </p>
+                <p class="card-text">
+                    <input type="text"
+                           id="name"
+                           class="form-control"
+                           aria-describedby="nameHelp"
+                           placeholder="Type your name..." aria-label="Type your name..."
+                           @bind-value="UXState.Name" @bind-value:event="oninput" />
+                    <small id="nameHelp" class="form-text text-muted">
+                        This field is reversed (look at right side) and store in State Manager property.<br />
+                        The first name is used as "User name" in the top bar.
+                    </small>
+                </p>
+                <p class="card-text mt-4">
+                    This template is available under the <i class="oi oi-heart"></i> MIT License.
+                    </p>
+                <p class="card-text text-right">
+                    <a href="https://github.com/nbiada" target="_blank" class="mr-2"><i class="fa fa-github fa-lg"></i></a>
+                    <a href="https://www.linkedin.com/in/nicolabiada/" target="_blank" class="mr-2"><i class="fa fa-linkedin fa-lg"></i></a>
+                    <a href="https://www.facebook.com/nicola.biada" target="_blank" class="mr-2"><i class="fa fa-facebook-official fa-lg"></i></a>
+                    <cite title="Nicola Biada">-- Nicola Biada</cite>
+                </p>
+            </div>
+        </div>
+        <div class="card border-left-success shadow">
+            <div class="card-header"><h6 class="font-weight-bold text-primary mb-0">State Manager Properties</h6></div>
+            <div class="card-body">
+                <p class="card-text">
+                    <dl>
+                        <dt>Counter</dt>
+                        <dd>@UXState.Counter</dd>
+                        <dt>Name - ReverseName</dt>
+                        <dd>@UXState.Name - <i>@UXState.ReverseName</i></dd>
+                        <dt>NavBarDisplay</dt>
+                        <dd>@UXState.NavBarDisplay</dd>
+                        <dt>SlideInDisplay - SlideInClass</dt>
+                        <dd>@UXState.SlideInDisplay - @UXState.SlideInClass</dd>
+                    </dl>
+                </p>
+            </div>
+            <div class="card-footer">
+                To activate top bar buttons use device toolbar via F12 (Developer Tools) or resize the browser under 770 pixel width.
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    protected UXState UXState { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var _counter = await Storage.GetItemAsync("counter");
+            UXState.Counter = Convert.ToInt32(_counter);
+        }
+    }
+}

@@ -1,0 +1,46 @@
+﻿@inherits LayoutComponentBase
+@implements IDisposable
+@inject UXState UXState
+@inject LocalStorage Storage
+
+@code {
+    private static bool inPrerender = true;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (!inPrerender)
+        {
+            DeregisterEvents();
+            UXState.OnChange += OnMyChangeHandler;
+            Storage.StorageChanged += HandleStorageChanged;
+        }
+        inPrerender = false;
+    }
+
+    public void Dispose()
+    {
+        DeregisterEvents();
+    }
+
+    private void DeregisterEvents()
+    {
+        UXState.OnChange -= OnMyChangeHandler;
+        Storage.StorageChanged -= HandleStorageChanged;
+    }
+
+    protected async void OnMyChangeHandler()
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    protected void HandleStorageChanged(object sender, StorageEventArgs e)
+    {
+        System.Diagnostics.Debug.Print($"Value for key \"{e.Key}\" changed from \"{e.OldValue}\" to \"{e.NewValue}\"");
+        if (e.Key.Equals("counter"))
+        {
+            UXState.Counter = UXState.KeyValueToInt(e.NewValue);
+        }
+    }
+}

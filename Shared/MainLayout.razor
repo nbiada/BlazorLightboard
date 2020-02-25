@@ -1,0 +1,26 @@
+﻿@inject UXState UXState
+@inherits BaseLayout
+
+<CascadingValue Value="UXState">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="big-main-container">
+        <TopBar />
+        <div id="slidebar-container" class="slidebar-container @UXState.SlideInClass">
+            <SlideInMenu />
+        </div>
+        <div class="content px-4" @onclick="HideSlideInSideBar">
+            @Body
+        </div>
+    </div>
+</CascadingValue>
+
+@code {
+    void HideSlideInSideBar()
+    {
+        if (UXState.SlideInDisplay)
+            UXState.SetSlideInDisplay(false);
+    }
+}

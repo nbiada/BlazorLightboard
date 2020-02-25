@@ -1,0 +1,57 @@
+﻿@page "/fetchdata"
+@using BlazorLightboard.Data
+@inject WeatherForecastService ForecastService
+
+<div class="container-fluid">
+    <h1 class="h2 mb-4">Weather forecast</h1>
+    <div class="card-deck">
+        <div class="card border-left-primary shadow">
+            <div class="card-header"><h6 class="font-weight-bold text-primary mb-0">Fetch Data</h6></div>
+            <div class="card-body">
+                <p class="card-text">
+                    This component demonstrates fetching data from a service.
+                </p>
+
+                @if (forecasts == null)
+                {
+                    <p class="card-text"><em>Loading...</em></p>
+                }
+                else
+                {
+                    <p class="card-text">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Temp. (C)</th>
+                                    <th>Temp. (F)</th>
+                                    <th>Summary</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var forecast in forecasts)
+                                {
+                                    <tr>
+                                        <td>@forecast.Date.ToShortDateString()</td>
+                                        <td>@forecast.TemperatureC</td>
+                                        <td>@forecast.TemperatureF</td>
+                                        <td>@forecast.Summary</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

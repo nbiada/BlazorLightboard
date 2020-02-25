@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Nicola Biada</Authors>
+    <Company>(v)italmente</Company>
+    <Product>Blazor Examples</Product>
+    <Description>BlazorLightboard, a Blazor Lightweight Dashboard, includes a State Manager and a local storage.
+</Description>
+    <Copyright>2020 (v)italmente</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cloudcrate.AspNetCore.Blazor.Browser.Storage" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>
