@@ -29,6 +29,9 @@ This template is available under the MIT License.
 
 ## See it in Action
 
+[Blazor Lightboard](https://blazorlightboard.azurewebsites.net/)
+
+
 ### Home
 ![Home](https://user-images.githubusercontent.com/4179320/75267717-e1cb7480-57f6-11ea-8c06-aefc0b6ed335.png?s=400)
 
