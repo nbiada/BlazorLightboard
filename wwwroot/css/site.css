@@ -25,6 +25,17 @@ app {
   width: 100%;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    background-color: #49505738;
+    width: 100%;
+    color: #9c9c9c;
+    font-size: 0.7rem;
+    overflow: hidden;
+}
+
 .top-bar {
   z-index: 2;
 }

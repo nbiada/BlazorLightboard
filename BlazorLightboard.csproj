@@ -4,10 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Nicola Biada</Authors>
     <Company>(v)italmente</Company>
-    <Product>Blazor Examples</Product>
-    <Description>BlazorLightboard, a Blazor Lightweight Dashboard, includes a State Manager and a local storage.
+    <Product>Blazor Lightboard</Product>
+    <Description>Blazor Lightweight admin Dashboard. Includes a State Manager and a local storage implementation.
 </Description>
     <Copyright>2020 (v)italmente</Copyright>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Deterministic>false</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
