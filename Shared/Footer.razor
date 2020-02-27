@@ -1,4 +1,6 @@
-﻿<footer class="footer navbar-default" role="contentinfo">
+﻿@using Helpers
+
+<footer class="footer navbar-default" role="contentinfo">
     <div class="container">
         <p class="mb-0 mt-1">
             @((MarkupString)copyright)
@@ -7,10 +9,11 @@
 </footer>
 
 @code {
-    string copyright;
+    static string copyright;
 
     protected override async Task OnInitializedAsync()
     {
+        // to prevent twice rendering
         if (string.IsNullOrEmpty(copyright))
         {
             await Task.Run(() =>
@@ -19,10 +22,11 @@
                 var netCoreVer = System.Environment.Version;
                 var architecture = System.Environment.OSVersion.Platform;
                 var runtimeVer = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
-                var os = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+                var os = System.Runtime.InteropServices.RuntimeInformation.OSDescription.Truncate(25, true, "&#8230;");
                 var appVer = GetType().Assembly.GetName().Version.ToString();
                 copyright = $"Version {appVer}<br />on {os}<br />via {runtimeVer}";
             });
         }
     }
+
 }
