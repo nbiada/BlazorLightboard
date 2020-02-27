@@ -1,6 +1,8 @@
 ﻿# Blazor Lightboard
 ## The Blazor Lightweight Dashboard Template
 
+![.NET Core](https://github.com/nbiada/BlazorLightboard/workflows/.NET%20Core/badge.svg)
+
 This project is a template for a lightweight responsive dashboard in Blazor.\
 It's based on the _Blazor-Dashboard_ project available via github.
 
